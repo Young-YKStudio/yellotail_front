@@ -4,8 +4,6 @@ import { logout, reset } from '../features/auth/authSlice';
 
 import PublicHeader from './headerParts/PublicHeader';
 import ClientHeader from './headerParts/ClientHeader';
-import EmployeeHeader from './headerParts/EmployeeHeader';
-import AdminHeader from './headerParts/AdminHeader';
 
 const Header = (props) => {
   // Handlers
@@ -27,9 +25,7 @@ const Header = (props) => {
 
   const headerDetailDistributor = (auth) => {
     if (auth === 'admin') {
-      return <AdminHeader logoutHandler={logoutHandler}/>
-    } else if (auth === 'employee') {
-      return <EmployeeHeader logoutHandler={logoutHandler}/>
+      return null
     } else if (auth === 'client') {
       return <ClientHeader logoutHandler={logoutHandler}/>
     } else {

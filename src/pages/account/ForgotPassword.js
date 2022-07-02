@@ -19,7 +19,7 @@ const ForgotPassword = (props) => {
     };
 
     try {
-      const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/forgotpassword`, { email }, config);
+      const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/forgotpassword`, { email: email }, config);
       if(data.success) {
         setSuccess(`${data.data}.  Please check your email.`)
       }
