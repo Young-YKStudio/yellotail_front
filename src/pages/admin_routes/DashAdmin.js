@@ -1,19 +1,18 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from '@headlessui/react';
 import {
-  CalendarIcon,
-  ChartBarIcon,
   ClipboardListIcon,
   BookOpenIcon,
   CogIcon,
   HomeIcon,
-  InboxIcon,
   MenuIcon,
-  UsersIcon,
   XIcon,
   PencilAltIcon,
-  PencilIcon
+  PencilIcon,
+  UserIcon
 } from '@heroicons/react/outline';
+import { useSelector } from "react-redux";
+
 
 // Pages
 import DashboardLanding from "./admin_pages/DashboardLanding";
@@ -28,6 +27,7 @@ const DashAdmin = (props) => {
 
   const [ sidebarOpen, setSidebarOpen ] = useState(false);
   const [ currentPage, setCurrentPage ] = useState('dashboard');
+  const { user } = useSelector((state) => state.auth);
 
   const navClickHandler = (e, Menu) => {
     e.preventDefault();
@@ -194,21 +194,18 @@ const DashAdmin = (props) => {
                   </nav>
                 </div>
                 <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                  <a href="#" className="flex-shrink-0 group block">
-                    <div className="flex items-center">
-                      <div>
-                        <img
-                          className="inline-block h-10 w-10 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
-                        <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
-                      </div>
+                <a href="#" className="flex-shrink-0 w-full group block">
+                  <div className="flex items-center">
+                    <div>
+                      <UserIcon className="inline-block h-6 w-6 text-gray-600" />
+
                     </div>
-                  </a>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user.user.username}</p>
+                      <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
+                    </div>
+                  </div>
+                </a>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -284,14 +281,11 @@ const DashAdmin = (props) => {
             <a href="#" className="flex-shrink-0 w-full group block">
               <div className="flex items-center">
                 <div>
-                  <img
-                    className="inline-block h-9 w-9 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
+                  <UserIcon className="inline-block h-6 w-6 text-gray-600" />
+
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{user.user.username}</p>
                   <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                 </div>
               </div>
@@ -310,21 +304,7 @@ const DashAdmin = (props) => {
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <main className="flex-1">
-          <div className="py-6">
-            {pageDistributor(currentPage)}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-            </div>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              {/* Replace with your content */}
-              <div className="py-4">
-                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
-              </div>
-              {/* /End replace */}
-            </div>
-          </div>
-        </main>
+        {pageDistributor(currentPage)}
       </div>
     </div>
   </>

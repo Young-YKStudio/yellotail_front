@@ -82,7 +82,7 @@ function App() {
             </Route>
           : null}
         </Routes>
-        <Footer />
+        <Footer authUser={authUser}/>
       </Router>
       <ToastContainer />
     </>
